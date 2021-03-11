@@ -9,7 +9,7 @@ public class DarkRuleConfig {
     private List<DarkFeatureConfig> features;
 
     @Data
-    public class DarkFeatureConfig {
+    public static class DarkFeatureConfig {
         private String key;
         private Boolean enabled;
         private String rule;

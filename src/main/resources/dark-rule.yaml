@@ -1,10 +1,10 @@
 features:
   - key: call_newapi_getUserById
     enabled: true
-    rule: { 893,342,1020-1120,%30 }
+    rule: "{ 893,342,1020-1120,30% }"
   - key: call_newapi_registerUser
     enabled: true
-    rule: { 1356789,%10 }
+    rule: "{ 1356789,10% }"
   - key: newalgo_loan
     enabled: true
-    rule: { 0-1000 }
+    rule: "{ 0-1000 }"
