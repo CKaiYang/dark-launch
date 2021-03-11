@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DarkFeature {
+public class DarkFeatureDefault implements IDarkFeature<Long> {
     private final static String START_WITH = "{";
     private final static String END_WITH = "}";
     private final static String SPLIT = ",";
@@ -20,7 +20,7 @@ public class DarkFeature {
     private Long percentage;
     private RangeSet rangeSet = TreeRangeSet.create();
 
-    public DarkFeature(DarkRuleConfig.DarkFeatureConfig darkFeatureConfig) {
+    public DarkFeatureDefault(DarkRuleConfig.DarkFeatureConfig darkFeatureConfig) {
         this.key = darkFeatureConfig.getKey();
         this.enabled = darkFeatureConfig.getEnabled();
         String darkRule = darkFeatureConfig.getRule().trim();
@@ -66,17 +66,19 @@ public class DarkFeature {
         return Long.parseLong(s.trim());
     }
 
+    @Override
     public boolean enabled() {
         return this.enabled;
     }
 
-    public boolean dark(long darkTarget) {
-        boolean contains = this.rangeSet.contains(darkTarget);
+    @Override
+    public boolean dark(Long target) {
+        boolean contains = this.rangeSet.contains(target);
         if (contains) {
             return true;
         }
 
-        long reminder = darkTarget % 100;
+        long reminder = target % 100;
         if (reminder >= 0 && reminder < this.percentage) {
             return true;
         }
